@@ -1,18 +1,29 @@
 ﻿using MyFruits.Common;
+using MyFruits.Interfaces;
+using System.Text;
 
 namespace MyFruits.Fruits;
 
-public class Berry : Fruit
+public class Berry : Fruit, IBerry
 {
     public ProduceColor Color { get; private set; }
     public DateTime HarvestDate { get; private set; }
     public bool IsRootVegetable { get; } = false;
 
-    public Berry(ProduceColor color, DateTime harvestDate,
-                 string name, string shape, string whereGrows, decimal price)
+    public Berry(ProduceColor color, DateTime harvestDate, string name, string shape, string whereGrows, decimal price)
     {
         InitializeFruit(name, shape, whereGrows, price);
-        Color = color;
-        HarvestDate = harvestDate;
+        SetColor(color);
+        SetHarvestDate(harvestDate);
+    }
+
+    public void SetColor(ProduceColor color) => Color = color;
+    public void SetHarvestDate(DateTime date) => HarvestDate = date;
+
+    protected override void AppendDetails(StringBuilder sb)
+    {
+        sb.AppendLine($"  Цвет: {Color}");
+        sb.AppendLine($"  Урожай: {HarvestDate:yyyy-MM-dd}");
+        sb.AppendLine($"  Корнеплод: {IsRootVegetable}");
     }
 }

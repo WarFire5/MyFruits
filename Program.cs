@@ -13,18 +13,16 @@ internal static class Program
 
         ErrorHandler.Run(() =>
         {
-            var items = new object[]
+            var items = new ProduceBase[]
             {
-                new Apple("Антоновка", 7.5, "Яблоко", "Круглая", "Сад", 95.90m),
-                new Berry(ProduceColor.Красный, new DateTime(2025, 7, 20), "Клубника", "Конус", "Грядка", 299.00m),
+                new Apple ("Антоновка", 7.5, "Яблоко",   "Круглая",     "Сад",     95.90m),
+                new Berry (ProduceColor.Красный, new DateTime(2025, 7, 20), "Клубника", "Конус", "Грядка", 299.00m),
                 new Potato("Гала", 6.0, "Картофель", "Овальная", "Поле", 45.00m),
-                new Tomato(ProduceColor.Красный, new DateTime(2025, 8, 5), "Помидор", "Шарообразная", "Теплица", 139.00m)
+                new Tomato(ProduceColor.Красный, new DateTime(2025, 8, 5), "Помидор", "Шарообразная", "Теплица", 139.00m),
             };
 
-            foreach (var it in items)
-            {
-                Console.WriteLine(ProduceFormatter.Format(it));
-            }
+            foreach (var p in items)
+                Console.WriteLine(p.DescribeVirtual());
         });
     }
 }
