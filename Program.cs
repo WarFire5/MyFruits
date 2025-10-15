@@ -22,7 +22,7 @@ internal static class Program
             };
 
             foreach (var p in items)
-                Console.WriteLine(p.DescribeVirtual());
+                ConsoleColorizer.WriteBlockWithColoredColors(p.DescribeVirtual());
         });
     }
 }
