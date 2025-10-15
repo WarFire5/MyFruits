@@ -23,6 +23,33 @@ internal static class Program
 
             foreach (var p in items)
                 ConsoleColorizer.WriteBlockWithColoredColors(p.DescribeVirtual());
+
+            while (true)
+            {
+                Console.WriteLine();
+                Console.Write("Сгенерировать ещё 10 объектов? (да/нет): ");
+                var answer = (Console.ReadLine() ?? "").Trim().ToLowerInvariant();
+
+                if (IsYes(answer))
+                {
+                    var more = ProduceRandom.Generate(fruitsCount: 5, vegetablesCount: 5);
+                    Console.WriteLine();
+                    foreach (var p in more)
+                        ConsoleColorizer.WriteBlockWithColoredColors(p.DescribeVirtual());
+                    continue;
+                }
+                if (IsNo(answer))
+                {
+                    Console.WriteLine("\nПока!");
+                    break;
+                }
+                // непонятный ввод — спрашиваем ещё раз
+            }
         });
     }
+    static bool IsYes(string s) =>
+        s is "да" or "д" or "y" or "yes" or "ага" or "ок" or "lf"; 
+
+    static bool IsNo(string s) =>
+        s is "нет" or "н" or "no" or "не" or "yas";
 }
